@@ -34,6 +34,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Cupom[] $cupons
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Note[] $notes
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIdentificationToken($value)
+ * @property int $cashback_available
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCashbackAvailable($value)
  */
 class User extends Authenticatable
 {
