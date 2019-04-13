@@ -34,7 +34,7 @@ class Product extends Model
         return $this->belongsTo(Note::class);
     }
 
-    public function getPriceValue($value) {
+    public function getPriceAttribute($value) {
         return $value / 100;
     }
 

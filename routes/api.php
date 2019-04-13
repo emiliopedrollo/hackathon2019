@@ -22,8 +22,6 @@ Route::get('/note/{note}', 'NoteController@show');
 
 Route::post('/discount', 'DiscountController@redeem');
 
-
-Route::get('/user/{user}','UserController@show');
 Route::post('/user','UserController@create');
 
 Route::get('/home', 'HomeController@userIndex');
