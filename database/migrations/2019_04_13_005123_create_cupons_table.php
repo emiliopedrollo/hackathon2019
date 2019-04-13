@@ -13,10 +13,11 @@ class CreateCuponsTable extends Migration
      */
     public function up()
     {
-        Schema::create('coupons', function (Blueprint $table) {
+        Schema::create('cupons', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
-            $table->
+            $table->integer('value')->unsigned();
+            $table->boolean('redeemed')->default(false);
             $table->timestamps();
         });
     }
