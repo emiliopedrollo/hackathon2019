@@ -29,4 +29,12 @@ class Product extends Model
     protected $hidden = ['id'];
 
     protected $guarded = ['id'];
+
+    public function getPriceValue($value) {
+        return $value / 100;
+    }
+
+    public function setPriceAttribute($value) {
+        $this->attributes['price'] = $value * 100;
+    }
 }
