@@ -19,4 +19,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/nota', 'NoteController@create');
+Route::get('/nota', 'NoteController@visualize');
