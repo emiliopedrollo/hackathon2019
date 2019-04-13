@@ -24,8 +24,12 @@ class NotesTableSeeder extends Seeder
             ]);
 
             if(random_int(1, 100) > 70) {
+                $user = $users->random();
                 $note->update([
-                    'user_id' => $users->random()->id
+                    'user_id' => $user->id
+                ]);
+                $user->update([
+                    'cashback_available' => $user->cashback_available + $note->discount_value,
                 ]);
             }
 
