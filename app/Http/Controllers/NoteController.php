@@ -43,11 +43,15 @@ class NoteController extends Controller
             ->firstOrFail();
 
         if ($note->user_id != null) {
-            return "Nota fiscal já cadastrada";
+            return "Nota fiscal já cadastrada ):";
         }
 
         $note->update([
             'user_id' => $user->id,
+        ]);
+
+        $user->update([
+            'cashback_available' = $user->cashback_available + $note->discount_value,
         ]);
         
         return 'Aproveite seu cashback de ' . $note->discount_value . '!';
