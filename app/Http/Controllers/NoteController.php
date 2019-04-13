@@ -11,14 +11,6 @@ class NoteController extends Controller
 {
 
     public function create(Request $request) {
-        $cpf = $request->get('cpf');
-
-        $attributes = [];
-
-        if ($cpf) {
-            $attributes['cpf'] = $cpf;
-        }
-
         /** @var Note $note */
         $note = Note::whereNull('user_id')->inRandomOrder()->first();
 
