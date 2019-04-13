@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\WithUserIdentificationToken;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,4 +26,15 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function userIndex(WithUserIdentificationToken $request) {
+        $user = $request->getAuthUser();
+
+        $notes = $user->notes()->orderBy('created_at', 'desc')->limit(20)->get();
+
+        $coupons = $user->cupons()->orderBy('created_at', 'desc')->get();
+
+        return 'blah monte bobao';
+    }
+
 }

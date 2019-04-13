@@ -14,5 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Note extends Model
 {
-    //
+    protected $hidden = ['id'];
+
+    protected $guarded = ['id'];
 }
