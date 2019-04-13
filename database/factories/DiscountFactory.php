@@ -17,7 +17,7 @@ use Faker\Generator as Faker;
 
 $factory->define(\App\Discount::class, function (Faker $faker) {
     return [
-        'value' => $faker->numberBetween(10, 500)/100,
+        'value' => $faker->numberBetween(43, 340),
 
     ];
 });

@@ -21,6 +21,7 @@ class HomeControllerTest extends TestCase
         /** @var User $user */
         $user = factory(User::class)->create([
             'identification_token' => 'TOKEN_DE_IDENTIFICACAO',
+            'cashback_available' => 58.32
         ]);
 
         $notes = factory(Note::class, 3)->create([
@@ -34,11 +35,7 @@ class HomeControllerTest extends TestCase
 
         $response = $this->get('/api/home?user_id=TOKEN_DE_IDENTIFICACAO');
 
-        dd($response->json());
-
         $response->assertStatus(200);
-
-
     }
 
     /**
