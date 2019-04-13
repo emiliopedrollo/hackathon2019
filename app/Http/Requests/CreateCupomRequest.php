@@ -5,8 +5,9 @@ namespace App\Http\Requests;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AttachNoteRequest extends WithUserIdentificationToken
+class CreateCupomRequest extends WithUserIdentificationToken
 {
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -16,7 +17,7 @@ class AttachNoteRequest extends WithUserIdentificationToken
     {
         return [
             'user_id' => 'required',
-            'data.note_identifier' => 'required',
+            'data.cupom_value' => 'required',
         ];
     }
 }
