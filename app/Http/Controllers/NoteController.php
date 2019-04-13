@@ -20,7 +20,7 @@ class NoteController extends Controller
         }
         $identifier = trim($identifier);
 
-        $qr_code = (new QRCode())->render("https://gmonte.github.io/meta-hackathon-front/c/".$note->note_identifier);
+        $qr_code = (new QRCode())->render("https://gmonte.github.io/meta-hackathon-front/#/sent-note/".$note->note_identifier);
 
         return view('note', [
             'note' => $identifier,
