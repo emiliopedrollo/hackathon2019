@@ -21,7 +21,6 @@ class CreateNotesTable extends Migration
             $table->string('cpf')->nullable();
             $table->integer('discount_value')->unsigned()->nullable();
             $table->timestamps();
-
         });
     }
 
