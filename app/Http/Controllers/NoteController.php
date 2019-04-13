@@ -13,6 +13,9 @@ class NoteController extends Controller
         /** @var Note $note */
         $note = Note::whereNull('user_id')->inRandomOrder()->first();
 
+        if ($note == null) {
+            $note = factory(Note::class)->create();
+        };
 
         $identifier = "";
         for ($i = 0; $i < 11; $i++) {
