@@ -31,11 +31,11 @@ class ProductTest extends TestCase
     /** @test */
     public function a_product_price_is_stored_as_int() {
         $product = factory(Product::class)->create([
-            'price' => 10.45
+            'price' => 10
         ]);
 
-        self::assertEquals(10.45, $product->price);
+        self::assertEquals(10, $product->price);
 
-        self::assertEquals(1045, $product->getAttributes()['price']);
+        self::assertEquals(1000, $product->getAttributes()['price']);
     }
 }
