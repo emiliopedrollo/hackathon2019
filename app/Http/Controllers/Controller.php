@@ -53,6 +53,18 @@ class Controller extends BaseController
         ], $statusCode, $headers);
     }
 
+    public static function respondSuccess($message, $statusCode = Response::HTTP_OK, $headers = [])
+    {
+        return static::respond([
+            'messages' => [
+                [
+                    'message' => $message ?: HttpStatusCode::getText($statusCode),
+                    'type' => 'success'
+                ]
+            ]
+        ], $statusCode, $headers);
+    }
+
     /**
      * @param $message
      * @param int $statusCode
@@ -63,7 +75,12 @@ class Controller extends BaseController
     {
 
         $error = [
-            'message' => $message ?: HttpStatusCode::getText($statusCode),
+            'messages' => [
+                [
+                    'message' => $message ?: HttpStatusCode::getText($statusCode),
+                    'type' => 'error',
+                ],
+            ],
             'message_code' => HttpStatusCode::getMessageCode($statusCode),
             'status_code' => $statusCode
         ];

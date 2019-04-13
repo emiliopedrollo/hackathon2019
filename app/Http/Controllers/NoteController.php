@@ -57,6 +57,6 @@ class NoteController extends Controller
         $user->update([
             'cashback_available' => $user->cashback_available + $note->discount_value,
         ]);
-        return static::respondData(['message' => 'Aproveite seu cashback de ' . $note->discount_value . '!']);
+        return static::respondSuccess('Aproveite seu cashback de ' . $note->discount_value . '!');
     }
 }

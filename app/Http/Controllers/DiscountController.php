@@ -29,7 +29,7 @@ class DiscountController extends Controller
             'cashback_available' => $user->cashback_available - $discount_value,
         ]);
 
-        return static::respondData(['message' => "Você usou um pouquinho do cashback!"]);
+        return static::respondSuccess("Você usou um pouquinho do cashback!");
     }
 
 }
