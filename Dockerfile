@@ -1,5 +1,7 @@
 FROM php:7.2-apache
 COPY ./ /var/www/html
+RUN chown www-data:www-data /var/www/html -R
+RUN chmod 755 /var/www/html -R
 
 RUN apt-get update -y && apt-get install -y sendmail libpng-dev libpq-dev zlib1g-dev
 
