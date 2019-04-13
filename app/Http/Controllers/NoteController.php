@@ -29,6 +29,6 @@ class NoteController extends Controller
             'user_id' => $user->id,
         ]);
         
-        return 'Aproveite seu cashback!';
+        return 'Aproveite seu cashback de ' . $note->discount_value . '!';
     }
 }
