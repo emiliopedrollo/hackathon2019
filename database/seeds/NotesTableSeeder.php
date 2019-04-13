@@ -14,13 +14,13 @@ class NotesTableSeeder extends Seeder
         $users = \App\User::get();
 
         factory(\App\Note::class, 50)->create()->each(function (\App\Note $note) use ($users) {
-            $value = (int)factory(\App\Product::class, random_int(1, 5))->create([
+            $value = (int) factory(\App\Product::class, random_int(1, 5))->create([
                 'note_id' => $note->id,
             ])->sum('price');
 
             $note->update([
                 'total_value' => $value,
-                'discount_value' => (int) $value * random_int(1, 10) / 100,
+                'discount_value' => (int) ($value * random_int(1, 10) / 100),
             ]);
 
             if(random_int(1, 100) > 70) {
