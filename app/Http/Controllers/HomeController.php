@@ -32,7 +32,7 @@ class HomeController extends Controller
 
         $notes = $user->notes()->orderBy('created_at', 'desc')->limit(20)->get();
 
-        $coupons = $user->cupons()->orderBy('created_at', 'desc')->get();
+        $coupons = $user->discounts()->orderBy('created_at', 'desc')->get();
 
         return 'blah monte bobao';
     }

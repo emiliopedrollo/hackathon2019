@@ -48,4 +48,12 @@ class Note extends Model
     public function setTotalValueAttribute($value) {
         $this->attributes['total_value'] = $value * 100;
     }
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function products() {
+        return $this->hasMany(Product::class);
+    }
 }

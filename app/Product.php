@@ -30,6 +30,10 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
+    public function note() {
+        return $this->belongsTo(Note::class);
+    }
+
     public function getPriceValue($value) {
         return $value / 100;
     }

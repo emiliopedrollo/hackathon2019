@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCupomRequest extends WithUserIdentificationToken
+class RedeemDiscountRequest extends WithUserIdentificationToken
 {
 
     /**
@@ -17,7 +17,7 @@ class CreateCupomRequest extends WithUserIdentificationToken
     {
         return [
             'user_id' => 'required',
-            'data.cupom_value' => 'required',
+            'data.discount_value' => 'required',
         ];
     }
 }

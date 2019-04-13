@@ -31,7 +31,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property string|null $identification_token
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Cupom[] $cupons
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Discount[] $cupons
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Note[] $notes
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIdentificationToken($value)
  * @property int $cashback_available
@@ -77,9 +77,9 @@ class User extends Authenticatable
         return $this->hasMany(Note::class);
     }
 
-    public function cupons()
+    public function discounts()
     {
-        return $this->hasMany(Cupom::class);
+        return $this->hasMany(Discount::class);
     }
 
     public function getCashbackAvailableAttribute($value) {
