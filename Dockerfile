@@ -15,8 +15,8 @@ RUN docker-php-ext-install gd
 
 RUN a2enmod rewrite
 
-RUN service apache2 restart
-
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+
+RUN service apache2 restart
 
 EXPOSE 80

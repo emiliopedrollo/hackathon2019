@@ -7,6 +7,7 @@ use App\User;
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
 use http\Client\Response;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -40,13 +41,11 @@ class UserController extends Controller
 
         $user = $request->getAuthUser();
 
-        list($type, $data) = explode(';', (new QRCode($options))->render($user->identification_token));
-        list(, $data)      = explode(',', $data);
-        $data = base64_decode($data);
+        $qr_code = (new QRCode($options))->render($user->identification_token,public_path('/qr_code/'.$user->identification_token.'.png'));
 
-
-        $response->setContent($data);
-        return $response;
+        return new JsonResponse([
+            'image' => url('/qr_code/'.$user->identification_token.'.png')
+        ]);
 
 
     }
