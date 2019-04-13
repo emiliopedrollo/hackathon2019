@@ -15,9 +15,8 @@ class RedeemDiscountRequest extends WithUserIdentificationToken
      */
     public function rules()
     {
-        return [
-            'user_id' => 'required',
+        return array_merge(parent::rules(), [
             'data.discount_value' => 'required',
-        ];
+        ]);
     }
 }
