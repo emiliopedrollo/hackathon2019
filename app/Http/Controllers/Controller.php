@@ -53,40 +53,14 @@ class Controller extends BaseController
         ], $statusCode, $headers);
     }
 
-
-    public static function respondEditableFields($fields, $headers = [])
+    public static function respondSuccess($message, $statusCode = Response::HTTP_OK, $headers = [])
     {
-        $code = Response::HTTP_OK;
         return static::respond([
-            'data' => [
-                'editable_fields' => $fields
-            ]
-        ], $code, $headers);
-    }
-
-    /**
-     * @param LengthAwarePaginator $data
-     * @param int $statusCode
-     * @param array $headers
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public static function respondPaginatedData($data, $statusCode = Response::HTTP_OK, $headers = [])
-    {
-        $data = $data->toArray();
-        return static::respond([
-            'data' => $data['data'],
-            'meta' => Arr::except($data, [
-                'data',
-                'first_page_url',
-                'last_page_url',
-                'prev_page_url',
-                'next_page_url',
-            ]),
-            'links' => [
-                'first' => $data['first_page_url'] ?? null,
-                'last' => $data['last_page_url'] ?? null,
-                'prev' => $data['prev_page_url'] ?? null,
-                'next' => $data['next_page_url'] ?? null,
+            'messages' => [
+                [
+                    'message' => $message ?: HttpStatusCode::getText($statusCode),
+                    'type' => 'success'
+                ]
             ]
         ], $statusCode, $headers);
     }
@@ -101,7 +75,12 @@ class Controller extends BaseController
     {
 
         $error = [
-            'message' => $message ?: HttpStatusCode::getText($statusCode),
+            'messages' => [
+                [
+                    'message' => $message ?: HttpStatusCode::getText($statusCode),
+                    'type' => 'error',
+                ],
+            ],
             'message_code' => HttpStatusCode::getMessageCode($statusCode),
             'status_code' => $statusCode
         ];
@@ -113,139 +92,5 @@ class Controller extends BaseController
         unset($extra['headers']);
 
         return static::respond(['error' => $error], $statusCode, $headers);
-    }
-
-    /**
-     * @param $message
-     * @param array $details
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public static function respondWithUnprocessableEntity($message = null, $details = [])
-    {
-        $message = $message ?: __('messages.errors.unprocessable_entity');
-        $details = (empty($details) ? [] : ['details' => $details]);
-        return static::respondWithError($message, Response::HTTP_UNPROCESSABLE_ENTITY, $details);
-    }
-
-    public static function respondWithConflict($message = null, $details = [])
-    {
-        $message = $message ?: __('messages.errors.conflict');
-        $details = (empty($details) ? [] : ['details' => $details]);
-        return static::respondWithError($message, Response::HTTP_CONFLICT, $details);
-    }
-
-    public static function respondWithMultipleChoices($message = null, $details = [])
-    {
-        $message = $message ?: __('messages.errors.multiple_choices');
-        $details = (empty($details) ? [] : ['details' => $details]);
-        return static::respondWithError($message, Response::HTTP_MULTIPLE_CHOICES, $details);
-    }
-
-    /**
-     * @param string|null $message
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public static function respondWithUnauthorized($message = null)
-    {
-        $message = $message ?: __('messages.errors.unauthorized');
-        return static::respondWithError($message, Response::HTTP_UNAUTHORIZED);
-    }
-
-    /**
-     * @param string|null $message
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public static function respondWithForbidden($message = null)
-    {
-        $message = $message ?: __('messages.errors.forbidden');
-        return static::respondWithError($message, Response::HTTP_FORBIDDEN);
-    }
-
-    /**
-     * @param string|null $message
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public static function respondWithBadRequest($message = null)
-    {
-        $message = $message ?: __('messages.errors.bad_request');
-        return static::respondWithError($message, Response::HTTP_BAD_REQUEST);
-    }
-
-    /**
-     * @param string|null $message
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public static function respondMethodNotAllowed($message = null)
-    {
-        $message = $message ?: __('messages.errors.method_not_allowed');
-        return static::respondWithError($message, Response::HTTP_METHOD_NOT_ALLOWED);
-    }
-
-    /**
-     * @param null $message
-     * @param array $data
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public static function respondCreated($message = null, $data = [])
-    {
-        $message = $message ?: __('messages.entity_created');
-        $code = Response::HTTP_CREATED;
-        $response = [
-            'message' => $message,
-            'message_code' => HttpStatusCode::getMessageCode($code)
-        ];
-
-        if ((is_array($data) and sizeof($data) > 0) or
-            ($data and !is_array($data))) {
-            $response['data'] = $data;
-        }
-
-        return static::respond($response, $code);
-    }
-
-    /**
-     * @param null $message
-     * @param array $data
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public static function respondCreatedWithWarning($message = null, $data = [])
-    {
-        $message = $message ?: __('messages.entity_created_with_warning');
-        $code = Response::HTTP_CREATED;
-        return static::respond([
-            'message' => $message,
-            'message_code' => HttpStatusCode::getMessageCode($code),
-            'data' => $data,
-        ], $code);
-    }
-
-    /**
-     * @param null $message
-     * @param $data
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public static function respondUpdated($message = null, $data = [])
-    {
-        $message = $message ?: __('messages.entity_updated');
-        $code = Response::HTTP_OK;
-        return static::respond([
-            'message' => $message,
-            'message_code' => HttpStatusCode::getMessageCode($code),
-            'data' => $data,
-        ], $code);
-    }
-
-    /**
-     * @param null $message
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public static function respondDeleted($message = null)
-    {
-        $message = $message ?: __('messages.entity_removed');
-        $code = Response::HTTP_OK;
-        return static::respond([
-            'message' => $message,
-            'message_code' => HttpStatusCode::getMessageCode($code)
-        ], $code);
     }
 }

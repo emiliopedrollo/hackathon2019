@@ -20,6 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/note', 'NoteController@attach');
 Route::get('/note/{note}', 'NoteController@show');
 
+Route::post('/discount', 'DiscountController@redeem');
+
 
 Route::get('/user/{user}','UserController@show');
 Route::post('/user','UserController@create');

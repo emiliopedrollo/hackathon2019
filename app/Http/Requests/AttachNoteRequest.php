@@ -14,9 +14,8 @@ class AttachNoteRequest extends WithUserIdentificationToken
      */
     public function rules()
     {
-        return [
-            'user_id' => 'required',
+        return array_merge(parent::rules(), [
             'data.note_identifier' => 'required',
-        ];
+        ]);
     }
 }
