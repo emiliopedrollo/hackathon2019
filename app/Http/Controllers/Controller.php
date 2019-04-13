@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Facades\HttpStatusCode;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Arr;
 
 class Controller extends BaseController
 {
@@ -62,10 +65,10 @@ class Controller extends BaseController
     }
 
     /**
-     * @param LengthAwarePaginator|\Illuminate\Contracts\Pagination\LengthAwarePaginator $data
+     * @param LengthAwarePaginator $data
      * @param int $statusCode
      * @param array $headers
-     * @return JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public static function respondPaginatedData($data, $statusCode = Response::HTTP_OK, $headers = [])
     {

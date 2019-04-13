@@ -36,6 +36,7 @@ class NoteController extends Controller
     }
 
     public function attach(AttachNoteRequest $request) {
+
         $user = $request->getAuthUser();
 
         $fields = $request->validated();
