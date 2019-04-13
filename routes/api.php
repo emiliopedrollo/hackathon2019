@@ -18,3 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/note', 'NoteController@attach');
+
+
+Route::get('/user/{user}','UserController@show');
+Route::post('/user','UserController@create');
