@@ -14,17 +14,19 @@ class DiscountController extends Controller
 
         $fields = $request->validated();
 
-        if($user->cashback_available < $fields['discount_value']) {
+        $discount_value = $fields['data']['discount_value'];
+
+        if($user->cashback_available < $discount_value) {
             return static::respondWithError("Você ainda não possui cashback o suficiente ):");
         }
 
         Discount::create([
             'user_id' => $user->id,
-            'value' => $fields['discount_value'],
+            'value' => $discount_value,
         ]);
 
         $user->update([
-            'cashback_available' => $user->cashback_available - $fields['discount_value'],
+            'cashback_available' => $user->cashback_available - $discount_value,
         ]);
 
         return static::respondData(['message' => "Você usou um pouquinho do cashback!"]);
