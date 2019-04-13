@@ -25,3 +25,5 @@ Route::post('/discount', 'DiscountController@redeem');
 Route::post('/user','UserController@create');
 
 Route::get('/home', 'HomeController@userIndex');
+
+Route::get('/whoami', 'UserController@identify');
