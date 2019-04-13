@@ -10,10 +10,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class UserController extends Controller
 {
 
-    public function show(User $user) {
-        return JsonResource::make($user);
-    }
-
     public function create(Request $request) {
 
         $data = $request->post('data');

@@ -34,6 +34,8 @@ class Note extends Model
 
     protected $guarded = ['id'];
 
+    protected $appends = ['credits_gained'];
+
     public function getDiscountValueAttribute($value) {
         return $value / 100;
     }
@@ -55,5 +57,9 @@ class Note extends Model
 
     public function products() {
         return $this->hasMany(Product::class);
+    }
+
+    public function getCreditsGainedAttribute() {
+        return $this->discount_value;
     }
 }

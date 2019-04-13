@@ -17,17 +17,6 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
-     * @param null $message
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public static function respondNotFound($message = null)
-    {
-        $message = $message ?: __('messages.errors.not_found');
-        $code = Response::HTTP_NOT_FOUND;
-        return static::respondWithError($message, $code);
-    }
-
-    /**
      * @param $data
      * @param $statusCode
      * @param array $headers
@@ -43,13 +32,6 @@ class Controller extends BaseController
     {
         return static::respond([
             'data' => $data
-        ], $statusCode, $headers);
-    }
-
-    public static function respondDataFirst($data, $statusCode = Response::HTTP_OK, $headers = [])
-    {
-        return static::respond([
-            'data' => $data[0]
         ], $statusCode, $headers);
     }
 

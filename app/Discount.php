@@ -29,4 +29,18 @@ class Discount extends Model
     protected $hidden = ['id'];
 
     protected $guarded = ['id'];
+
+    protected $appends = ['credits_gained'];
+
+    public function getValueAttribute($value) {
+        return $value/100;
+    }
+
+    public function setValueAttribute($value) {
+        $this->attributes['value'] = $value * 100;
+    }
+
+    public function getCreditsGainedAttribute() {
+        return - $this->value;
+    }
 }
