@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Note;
 use chillerlan\QRCode\QRCode;
 use App\Http\Requests\WithUserIdentificationToken;
-use Illuminate\Http\Request;
 
 class NoteController extends Controller
 {
 
-    public function create(Request $request) {
+    public function visualize() {
         /** @var Note $note */
         $note = Note::whereNull('user_id')->inRandomOrder()->first();
 
