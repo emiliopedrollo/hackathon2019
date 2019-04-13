@@ -17,9 +17,9 @@ class CreateNotesTable extends Migration
             $table->bigIncrements('id');
             $table->string('note_identifier');
             $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->integer('total_value')->unsigned();
+            $table->integer('total_value')->unsigned()->nullable();
             $table->string('cpf')->nullable();
-            $table->integer('discount_value')->unsigned();
+            $table->integer('discount_value')->unsigned()->nullable();
             $table->timestamps();
 
         });
