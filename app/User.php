@@ -30,6 +30,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string|null $identification_token
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Cupom[] $cupons
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Note[] $notes
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIdentificationToken($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Cupom[] $cupons
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Note[] $notes
  */

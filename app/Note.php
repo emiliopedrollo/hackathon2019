@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $note_identifier
  * @property int|null $user_id
- * @property int $total_value
+ * @property int|null $total_value
  * @property string|null $cpf
  * @property int|null $discount_value
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -33,4 +33,12 @@ class Note extends Model
     protected $hidden = ['id'];
 
     protected $guarded = ['id'];
+
+    public function getDiscountValueAttribute($value) {
+        return $value / 100;
+    }
+
+    public function getTotalValueAttribute($value) {
+        return $value / 100;
+    }
 }

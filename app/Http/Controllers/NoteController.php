@@ -50,7 +50,7 @@ class NoteController extends Controller
         $note->update([
             'user_id' => $user->id,
         ]);
-
-        return 'Aproveite seu cashback!';
+        
+        return 'Aproveite seu cashback de ' . $note->discount_value . '!';
     }
 }
