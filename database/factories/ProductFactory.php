@@ -18,7 +18,6 @@ use Faker\Generator as Faker;
 $factory->define(\App\Product::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'price' => $faker->numberBetween(10, 500),
-        'remember_token' => Str::random(10),
+        'price' => $faker->numberBetween(10, 500)
     ];
 });
