@@ -32,7 +32,7 @@ class NoteController extends Controller
 
 
     public function show(Note $note) {
-        return $note->load('products')->toArray();
+        return static::respondData($note->load('products')->toArray());
     }
 
     public function attach(AttachNoteRequest $request) {
