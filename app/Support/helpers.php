@@ -5,6 +5,7 @@ function cpf( $base = null, $dotted = false ) {
     {
         $base = str_split($base);
     } else {
+        $base = [];
         $base[0] = rand( 0, 9 );
         $base[1] = rand( 0, 9 );
         $base[2] = rand( 0, 9 );
