@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AttachNoteRequest;
 use App\Note;
 use chillerlan\QRCode\QRCode;
-use App\Http\Requests\WithUserIdentificationToken;
 
 class NoteController extends Controller
 {
