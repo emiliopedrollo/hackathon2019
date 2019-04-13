@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AttachNoteRequest;
 use App\Note;
 use chillerlan\QRCode\QRCode;
 use App\Http\Requests\WithUserIdentificationToken;
@@ -34,16 +35,19 @@ class NoteController extends Controller
         return $note->load('products')->toArray();
     }
 
-    public function attach(WithUserIdentificationToken $request) {
+    public function attach(AttachNoteRequest $request) {
         $user = $request->getAuthUser();
 
         $fields = $request->validated();
 
-        $note = Note::where('note_identifier', '=', $fields['note_identifier'])
+        $note_identifier = $fields['data']['note_identifier'];
+
+        /** @var Note $note */
+        $note = Note::where('note_identifier', '=', $note_identifier)
             ->firstOrFail();
 
         if ($note->user_id != null) {
-            return "Nota fiscal já cadastrada ):";
+            return static::respondWithError('Nota fiscal já cadastrada ):');
         }
 
         $note->update([
@@ -53,7 +57,6 @@ class NoteController extends Controller
         $user->update([
             'cashback_available' => $user->cashback_available + $note->discount_value,
         ]);
-        
-        return 'Aproveite seu cashback de ' . $note->discount_value . '!';
+        return static::respondData(['message' => 'Aproveite seu cashback de ' . $note->discount_value . '!']);
     }
 }

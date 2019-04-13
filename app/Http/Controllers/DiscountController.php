@@ -15,7 +15,7 @@ class DiscountController extends Controller
         $fields = $request->validated();
 
         if($user->cashback_available < $fields['discount_value']) {
-            return "Você ainda não possui cashback o suficiente ):";
+            return static::respondWithError("Você ainda não possui cashback o suficiente ):");
         }
 
         Discount::create([
@@ -27,8 +27,7 @@ class DiscountController extends Controller
             'cashback_available' => $user->cashback_available - $fields['discount_value'],
         ]);
 
-        return "Você usou um pouquinho do cashback!";
-
+        return static::respondData(['message' => "Você usou um pouquinho do cashback!"]);
     }
 
 }
