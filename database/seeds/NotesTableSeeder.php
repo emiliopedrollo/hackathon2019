@@ -13,10 +13,10 @@ class NotesTableSeeder extends Seeder
     {
         $users = \App\User::get();
 
-        factory(\App\Note::class)->create(5000)->each(function (\App\Note $note) use ($users) {
-            $value = factory(\App\Product::class, [
+        factory(\App\Note::class, 5000)->create()->each(function (\App\Note $note) use ($users) {
+            $value = factory(\App\Product::class, random_int(1, 50))->create([
                 'note_id' => $note->id,
-            ])->create(random_int(1, 50))->sum('value');
+            ])->sum('value');
 
             $note->update([
                 'total_value' => $value,
