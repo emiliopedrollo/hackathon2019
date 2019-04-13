@@ -41,4 +41,11 @@ class Note extends Model
     public function getTotalValueAttribute($value) {
         return $value / 100;
     }
+
+    public function setDiscountValueAttribute($value) {
+        $this->attributes['discount_value'] = $value * 100;
+    }
+    public function setTotalValueAttribute($value) {
+        $this->attributes['total_value'] = $value * 100;
+    }
 }
