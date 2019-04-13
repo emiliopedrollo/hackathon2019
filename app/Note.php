@@ -45,10 +45,10 @@ class Note extends Model
     }
 
     public function setDiscountValueAttribute($value) {
-        $this->attributes['discount_value'] = int($value * 100);
+        $this->attributes['discount_value'] = (int) $value * 100;
     }
     public function setTotalValueAttribute($value) {
-        $this->attributes['total_value'] = int($value * 100);
+        $this->attributes['total_value'] = (int) $value * 100;
     }
 
     public function user() {
