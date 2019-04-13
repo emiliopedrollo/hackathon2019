@@ -51,7 +51,7 @@ class NoteController extends Controller
         ]);
 
         $user->update([
-            'cashback_available' = $user->cashback_available + $note->discount_value,
+            'cashback_available' => $user->cashback_available + $note->discount_value,
         ]);
         
         return 'Aproveite seu cashback de ' . $note->discount_value . '!';
